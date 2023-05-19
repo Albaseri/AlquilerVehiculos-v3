@@ -31,7 +31,7 @@ public class ListarClientes extends Controlador {
 	private TableView<Cliente> tvClientes;
 
 	@FXML
-	void aceptar(ActionEvent event) {
+	void salir(ActionEvent event) {
 		getEscenario().close();
 
 	}

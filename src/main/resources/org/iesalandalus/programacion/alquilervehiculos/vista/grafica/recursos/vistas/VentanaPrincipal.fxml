@@ -5,35 +5,95 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-
-<VBox alignment="TOP_CENTER" prefHeight="393.0" prefWidth="318.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.iesalandalus.programacion.alquilervehiculos.vista.grafica.controladores.VentanaPrincipal">
+<VBox alignment="TOP_CENTER" prefHeight="266.0" prefWidth="660.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.iesalandalus.programacion.alquilervehiculos.vista.grafica.controladores.VentanaPrincipal">
    <children>
-      <MenuBar>
+      <MenuBar nodeOrientation="RIGHT_TO_LEFT" style="-fx-background-color: #6BC0EB;">
         <menus>
-          <Menu mnemonicParsing="false" text="File">
+          <Menu mnemonicParsing="false" text="Salir">
             <items>
-              <MenuItem mnemonicParsing="false" text="Close" />
+              <MenuItem mnemonicParsing="false" onAction="#cerrarSesion" text="Cerrar sesión" />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Edit">
+          <Menu mnemonicParsing="false" text="Ayuda">
             <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
+              <MenuItem mnemonicParsing="false" onAction="#acercaDe" text="Acerca de..." />
             </items>
           </Menu>
         </menus>
       </MenuBar>
-      <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+      <HBox alignment="BOTTOM_CENTER" prefHeight="360.0" prefWidth="200.0" spacing="100.0" style="-fx-background-color: white;">
          <children>
-            <Button mnemonicParsing="false" onAction="#listarClientes" text="Listar Clientes" />
-            <Button mnemonicParsing="false" onAction="#leerCliente" text="Leer Cliente" textFill="#2a62b8">
+            <ImageView fitHeight="92.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../../../../imagenes/cliente.png" />
+               </image>
                <HBox.margin>
                   <Insets />
                </HBox.margin>
+            </ImageView>
+            <ImageView fitHeight="92.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../../../../imagenes/coche.png" />
+               </image>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </ImageView>
+            <ImageView fitHeight="92.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../../../../imagenes/alquiler.png" />
+               </image>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </ImageView>
+         </children>
+         <VBox.margin>
+            <Insets top="50.0" />
+         </VBox.margin>
+      </HBox>
+      <HBox alignment="TOP_CENTER" prefHeight="40.0" prefWidth="314.0" spacing="50.0">
+         <children>
+            <Button mnemonicParsing="false" onAction="#clientes" style="-fx-background-color: #75CDFF;" text="CLIENTES" textAlignment="CENTER" textFill="#130101">
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+               <font>
+                  <Font name="Impact" size="22.0" />
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#vehiculos" style="-fx-background-color: #75CDFF;" text="VEHÍCULOS" textAlignment="CENTER" textFill="#000103">
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+               <font>
+                  <Font name="Impact" size="22.0" />
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#alquiler" style="-fx-background-color: #75CDFF;" text="ALQUILER" textAlignment="CENTER" textFill="#000103">
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+               <font>
+                  <Font name="Impact" size="22.0" />
+               </font>
             </Button>
          </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <padding>
+            <Insets left="5.0" top="10.0" />
+         </padding>
+         <VBox.margin>
+            <Insets bottom="90.0" left="90.0" right="90.0" top="20.0" />
+         </VBox.margin>
       </HBox>
    </children>
 </VBox>

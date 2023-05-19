@@ -23,7 +23,7 @@ import org.xml.sax.SAXException;
 public class UtilidadesXml {
 
 	private UtilidadesXml() {
-		// Evito que se creen instancias.
+
 	}
 
 	public static DocumentBuilder crearConstructorDocumentoXml() {
@@ -50,11 +50,11 @@ public class UtilidadesXml {
 			StreamResult destino = new StreamResult(salida);
 			DOMSource fuente = new DOMSource(documento);
 			conversor.transform(fuente, destino);
-			System.out.printf("Fichero %s escrito correctamente.%n", salida);
+			System.out.printf("El fichero %s ha sido escrito correctamente.%n", salida);
 		} catch (TransformerConfigurationException | TransformerFactoryConfigurationError e) {
 			System.out.println("Imposible crear el conversor.");
 		} catch (TransformerException e) {
-			System.out.println("Error irecuperable en la conversión.");
+			System.out.println("Error irecuperable en la conversiÃ³n.");
 		} catch (IOException e) {
 			System.out.printf("No existe el directorio de destino o no tengo permiso de escritura: %s.%n", salida);
 		}
@@ -71,7 +71,7 @@ public class UtilidadesXml {
 		} catch (SAXException e) {
 			System.out.println("Documento XML mal formado.");
 		} catch (IOException e) {
-			// No hacemos nada ante este error y devolverá null
+
 		}
 		return documentoXml;
 	}

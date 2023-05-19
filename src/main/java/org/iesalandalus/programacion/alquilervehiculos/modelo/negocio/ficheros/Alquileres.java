@@ -118,14 +118,13 @@ public class Alquileres implements IAlquileres {
 	private Element getElemento(Document documentoXml, Alquiler alquiler) {
 		Element elementoAlquiler = documentoXml.createElement(ALQUILER);
 		elementoAlquiler.setAttribute(CLIENTE, alquiler.getCliente().getDni());
-		elementoAlquiler.setAttribute(VEHICULO, alquiler.getVehiculo().getMatricula());
-
-		elementoAlquiler.setAttribute(FECHA_ALQUILER, FORMATO_FECHA.format(alquiler.getFechaAlquiler()));
-
-		if (alquiler.getFechaDevolucion() != null) {
-			elementoAlquiler.setAttribute(FECHA_DEVOLUCION, FORMATO_FECHA.format(alquiler.getFechaDevolucion()));
-
+		elementoAlquiler.setAttribute(FECHA_ALQUILER,
+				String.format("%s", alquiler.getFechaAlquiler().format(FORMATO_FECHA)));
+		LocalDate fechaDevolucion = alquiler.getFechaDevolucion();
+		if (fechaDevolucion != null) {
+			elementoAlquiler.setAttribute(FECHA_DEVOLUCION, String.format("%s", fechaDevolucion.format(FORMATO_FECHA)));
 		}
+		elementoAlquiler.setAttribute(VEHICULO, alquiler.getVehiculo().getMatricula());
 		return elementoAlquiler;
 	}
 
@@ -196,8 +195,9 @@ public class Alquileres implements IAlquileres {
 		Alquiler alquiler = getAlquilerAbierto(cliente);
 		if (alquiler == null) {
 			throw new OperationNotSupportedException("ERROR: No existe ningún alquiler abierto para ese cliente.");
+		} else {
+			alquiler.devolver(fechaDevolucion); // corregido
 		}
-		alquiler.devolver(fechaDevolucion); // corregido
 	}
 
 	private Alquiler getAlquilerAbierto(Cliente cliente) {
@@ -254,9 +254,9 @@ public class Alquileres implements IAlquileres {
 			throw new NullPointerException("ERROR: No se puede borrar un alquiler nulo.");
 		}
 		if (coleccionAlquileres.contains(alquiler)) {
-			coleccionAlquileres.remove(alquiler);
-		} else {
 			throw new OperationNotSupportedException("ERROR: No existe ningún alquiler igual.");
 		}
+		coleccionAlquileres.remove(alquiler);
+
 	}
 }

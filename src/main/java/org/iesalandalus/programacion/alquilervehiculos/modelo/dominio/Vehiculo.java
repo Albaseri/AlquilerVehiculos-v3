@@ -79,7 +79,7 @@ public abstract class Vehiculo {
 		} else if (vehiculo instanceof Furgoneta furgoneta) {
 			vehiculoCopiado = new Furgoneta(furgoneta);
 		}
-		return vehiculoCopiado; // crear luego el bus y la furgoneta
+		return vehiculoCopiado; 
 	}
 
 	public abstract int getFactorPrecio();

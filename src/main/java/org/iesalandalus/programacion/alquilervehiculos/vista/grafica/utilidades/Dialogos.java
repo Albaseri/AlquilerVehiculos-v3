@@ -26,7 +26,7 @@ public class Dialogos {
 		}
 		css = url;
 	}
-
+	
 	private static void setHojaEstilos(Dialog<?> dialogo) {
 		if (css != null) {
 			dialogo.getDialogPane().getStylesheets().add(css);
@@ -83,7 +83,7 @@ public class Dialogos {
 		Optional<ButtonType> respuesta = dialogo.showAndWait();
 		return (respuesta.isPresent() && respuesta.get() == ButtonType.OK);
 	}
-
+	
 	public static String mostrarDialogoTexto(String titulo, String contenido, Stage propietario) {
 		TextInputDialog dialogo = new TextInputDialog();
 		dialogo.setGraphic(null);
@@ -95,7 +95,7 @@ public class Dialogos {
 		dialogo.setContentText(contenido);
 		dialogo.initModality(Modality.APPLICATION_MODAL);
 		dialogo.initOwner(propietario);
-
+		
 		Optional<String> respuesta = dialogo.showAndWait();
 		return (respuesta.isPresent() ? respuesta.get() : null);
 	}

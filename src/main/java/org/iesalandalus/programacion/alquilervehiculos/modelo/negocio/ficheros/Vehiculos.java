@@ -34,8 +34,9 @@ public class Vehiculos implements IVehiculos {
 	private static final String AUTOBUS = "autobus";
 	private static final String FURGONETA = "furgoneta";
 
-	private List<Vehiculo> coleccionVehiculos;
 	private static Vehiculos instancia;
+
+	private List<Vehiculo> coleccionVehiculos;
 
 	private Vehiculos() {
 		coleccionVehiculos = new ArrayList<>();
@@ -52,51 +53,51 @@ public class Vehiculos implements IVehiculos {
 	public void comenzar() {
 		Document documento = UtilidadesXml.leerXmlDeFichero(FICHERO_VEHICULOS);
 		if (documento != null) {
-			System.out.println("Fichero XML leído correctamente.");
+			System.out.println("El fichero XML de vehiculos, ha sido leído correctamente.");
 			leerDom(documento);
 		} else {
 			System.out.printf("No se puede leer el fichero de entrada: %s.%n", FICHERO_VEHICULOS);
 		}
+
 	}
 
 	private void leerDom(Document documentoXml) {
 		NodeList vehiculos = documentoXml.getElementsByTagName(VEHICULO);
 		for (int i = 0; i < vehiculos.getLength(); i++) {
-			Node nVehiculo = vehiculos.item(i);
-			if (nVehiculo.getNodeType() == Node.ELEMENT_NODE) {
+			Node vehiculo = vehiculos.item(i);
+			if (vehiculo.getNodeType() == Node.ELEMENT_NODE) {
 				try {
-					insertar(getVehiculo((Element) nVehiculo));
+					insertar(getVehiculo(((Element) vehiculo)));
 				} catch (Exception e) {
 					System.out.println(e.getMessage());
+					System.out.printf("ERROR: El error esta en el vehiculo que ocupa la posición: %s%n", i);
 				}
 			}
 		}
 	}
 
 	private Vehiculo getVehiculo(Element elemento) {
+		Vehiculo vehiculo = null;
 		String marca = elemento.getAttribute(MARCA);
 		String modelo = elemento.getAttribute(MODELO);
 		String matricula = elemento.getAttribute(MATRICULA);
-
-		int cilindrada = Integer.parseInt(elemento.getAttribute(CILINDRADA));
-		int plazas = Integer.parseInt(elemento.getAttribute(PLAZAS));
-		int pma = Integer.parseInt(elemento.getAttribute(PMA));
-
-		Vehiculo vehiculoVariable = (Vehiculo) elemento;
-		if (vehiculoVariable instanceof Turismo) {
-			vehiculoVariable = new Turismo(marca, modelo, cilindrada, matricula);
-		} else if (vehiculoVariable instanceof Autobus) {
-			vehiculoVariable = new Autobus(marca, modelo, plazas, matricula);
-		} else if (vehiculoVariable instanceof Furgoneta) {
-			vehiculoVariable = new Furgoneta(marca, modelo, pma, plazas, matricula);
+		if (elemento.getAttribute(TIPO).equals(TURISMO)) {
+			int cilindrada = Integer.parseInt(elemento.getAttribute(CILINDRADA));
+			vehiculo = new Turismo(marca, modelo, cilindrada, matricula);
+		} else if (elemento.getAttribute(TIPO).equals(FURGONETA)) {
+			int pma = Integer.parseInt(elemento.getAttribute(PMA));
+			int plazas = Integer.parseInt(elemento.getAttribute(PLAZAS));
+			vehiculo = new Furgoneta(marca, modelo, pma, plazas, matricula);
+		} else if (elemento.getAttribute(TIPO).equals(AUTOBUS)) {
+			int plazas = Integer.parseInt(elemento.getAttribute(PLAZAS));
+			vehiculo = new Autobus(marca, modelo, plazas, matricula);
 		}
-		return vehiculoVariable;
+		return vehiculo;
 	}
 
 	@Override
 	public void terminar() {
 		UtilidadesXml.escribirXmlAFichero(crearDom(), FICHERO_VEHICULOS);
-
 	}
 
 	private Document crearDom() {
@@ -114,27 +115,20 @@ public class Vehiculos implements IVehiculos {
 	}
 
 	private Element getElemento(Document documentoXml, Vehiculo vehiculo) {
-
 		Element elementoVehiculo = documentoXml.createElement(VEHICULO);
 		elementoVehiculo.setAttribute(MARCA, vehiculo.getMarca());
-		elementoVehiculo.setAttribute(MATRICULA, vehiculo.getMatricula());
 		elementoVehiculo.setAttribute(MODELO, vehiculo.getModelo());
-
-		if (vehiculo instanceof Turismo turismoN) {
-			elementoVehiculo.setAttribute(CILINDRADA, String.valueOf(turismoN.getCilindrada()));
+		elementoVehiculo.setAttribute(MATRICULA, vehiculo.getMatricula());
+		if (vehiculo instanceof Turismo turismo) {
+			elementoVehiculo.setAttribute(CILINDRADA, String.format("%s", turismo.getCilindrada()));
 			elementoVehiculo.setAttribute(TIPO, TURISMO);
-		} else if (vehiculo instanceof Autobus autobusN) {
-			elementoVehiculo.setAttribute(PLAZAS, String.valueOf((autobusN.getPlazas())));
-			elementoVehiculo.setAttribute(TIPO, AUTOBUS);
-
-		} else if (vehiculo instanceof Furgoneta furgonetaN) {
-			elementoVehiculo.setAttribute(PMA, String.valueOf(furgonetaN.getPma()));
-			elementoVehiculo.setAttribute(PLAZAS, String.valueOf(furgonetaN.getPlazas()));
+		} else if (vehiculo instanceof Furgoneta furgoneta) {
+			elementoVehiculo.setAttribute(PMA, String.format("%s", furgoneta.getPma()));
+			elementoVehiculo.setAttribute(PLAZAS, String.format("%s", furgoneta.getPlazas()));
 			elementoVehiculo.setAttribute(TIPO, FURGONETA);
-
-			// Con STRING.FORMAT--> elementoVehiculo.setAttribute(PLAZAS,
-			// String.format("%s",furgonetaN.getPlazas()));
-
+		} else if (vehiculo instanceof Autobus autobus) {
+			elementoVehiculo.setAttribute(PLAZAS, String.format("%s", autobus.getPlazas()));
+			elementoVehiculo.setAttribute(TIPO, AUTOBUS);
 		}
 		return elementoVehiculo;
 	}
@@ -161,11 +155,11 @@ public class Vehiculos implements IVehiculos {
 		if (vehiculo == null) {
 			throw new NullPointerException("ERROR: No se puede buscar un vehículo nulo.");
 		}
-		int indiceVehiculo = coleccionVehiculos.indexOf(vehiculo);
-		if (indiceVehiculo != -1) {
-			vehiculo = coleccionVehiculos.get(indiceVehiculo);
-		} else {
+		int indice = coleccionVehiculos.indexOf(vehiculo);
+		if (indice == -1) {
 			vehiculo = null;
+		} else {
+			vehiculo = coleccionVehiculos.get(indice);
 		}
 		return vehiculo;
 	}
@@ -175,10 +169,9 @@ public class Vehiculos implements IVehiculos {
 		if (vehiculo == null) {
 			throw new NullPointerException("ERROR: No se puede borrar un vehículo nulo.");
 		}
-		if (coleccionVehiculos.contains(vehiculo)) {
-			coleccionVehiculos.remove(vehiculo);
-		} else {
+		if (!coleccionVehiculos.contains(vehiculo)) {
 			throw new OperationNotSupportedException("ERROR: No existe ningún vehículo con esa matrícula.");
 		}
+		coleccionVehiculos.remove(vehiculo);
 	}
 }

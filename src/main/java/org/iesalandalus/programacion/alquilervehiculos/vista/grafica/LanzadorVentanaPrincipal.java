@@ -14,6 +14,7 @@ public class LanzadorVentanaPrincipal extends Application {
 	@Override
 	public void start(Stage escenarioPrincipal) throws Exception {
 		try {
+			
 
 			Controlador ventanaPrincipal = Controladores.get("vistas/VentanaPrincipal.fxml", TITULO, null);
 

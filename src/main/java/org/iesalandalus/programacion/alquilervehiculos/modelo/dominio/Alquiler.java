@@ -31,7 +31,7 @@ public class Alquiler {
 			throw new NullPointerException("ERROR: No es posible copiar un alquiler nulo.");
 		}
 		cliente = new Cliente(alquiler.getCliente());
-		vehiculo = Vehiculo.copiar(vehiculo);
+		vehiculo = Vehiculo.copiar(alquiler.getVehiculo());
 		fechaAlquiler = alquiler.getFechaAlquiler();
 		fechaDevolucion = alquiler.getFechaDevolucion();
 	}

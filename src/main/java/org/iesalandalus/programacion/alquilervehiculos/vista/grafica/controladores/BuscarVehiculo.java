@@ -35,18 +35,17 @@ public class BuscarVehiculo extends Controlador {
 	private boolean cancelado;
 
 	@FXML
-	void buscarV(ActionEvent event) {
-		String matricula = tfMatricula.getText();
-		Vehiculo vehiculo = VistaGrafica.getInstancia().getControlador()
-				.buscar(Vehiculo.getVehiculoConMatricula(matricula));
-		tfMarca.setText(vehiculo.getMarca());
-		tfModelo.setText(vehiculo.getModelo());
-
+	void initialize() {
+		Controles.deshabilitarCamposTexto(tfMarca, tfModelo);
 	}
 
 	@FXML
-	void initialize() {
-		Controles.deshabilitarCamposTexto(tfMarca, tfModelo);
+	void buscarV(ActionEvent event) {
+		String matricula = tfMatricula.getText();
+		Vehiculo vehiculo = VistaGrafica.getInstancia().getControlador().buscar(Vehiculo.getVehiculoConMatricula(matricula));
+		tfMarca.setText(vehiculo.getMarca());
+		tfModelo.setText(vehiculo.getModelo());
+
 	}
 
 	@FXML
@@ -62,7 +61,7 @@ public class BuscarVehiculo extends Controlador {
 	}
 
 	@FXML
-	void cerrarSesion(ActionEvent event) {
+	void cerrarVentana(ActionEvent event) {
 		getEscenario().close();
 
 	}

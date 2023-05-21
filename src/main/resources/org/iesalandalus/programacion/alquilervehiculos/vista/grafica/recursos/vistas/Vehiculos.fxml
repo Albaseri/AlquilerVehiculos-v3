@@ -12,13 +12,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="288.0" prefWidth="646.0" style="-fx-background-color: #EFF9FF;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.iesalandalus.programacion.alquilervehiculos.vista.grafica.controladores.Vehiculos">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="288.0" prefWidth="646.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.iesalandalus.programacion.alquilervehiculos.vista.grafica.controladores.Vehiculos">
    <children>
       <MenuBar nodeOrientation="RIGHT_TO_LEFT" style="-fx-background-color: #6BC0EB;">
          <menus>
             <Menu mnemonicParsing="false" text="Salir">
                <items>
-                  <MenuItem mnemonicParsing="false" onAction="#cerrarSesion" text="Cerrar sesión" />
+                  <MenuItem mnemonicParsing="false" onAction="#cerrarVentana" text="Cerrar ventana" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Ayuda">
@@ -48,13 +48,13 @@
          <children>
             <ImageView fitHeight="150.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../../../../imagenes/lista.png" />
+                  <Image url="@../../../../../../../../imagenes/listarV.png" />
                </image>
                <HBox.margin>
                   <Insets bottom="10.0" left="30.0" />
                </HBox.margin>
             </ImageView>
-            <Button mnemonicParsing="false" onAction="#listarVehiculo" style="-fx-background-color: #B0CBFD;" text="LISTAR " textAlignment="CENTER" textFill="#130101">
+            <Button mnemonicParsing="false" onAction="#listarVehiculo" style="-fx-background-color: #FFA38F;" text="LISTAR " textAlignment="CENTER" textFill="#130101">
                <HBox.margin>
                   <Insets bottom="20.0" left="20.0" right="20.0" top="10.0" />
                </HBox.margin>
@@ -64,13 +64,13 @@
             </Button>
             <ImageView fitHeight="49.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../../../../imagenes/añadir.png" />
+                  <Image url="@../../../../../../../../imagenes/insertarV.png" />
                </image>
                <HBox.margin>
                   <Insets left="50.0" right="20.0" />
                </HBox.margin>
             </ImageView>
-            <Button mnemonicParsing="false" onAction="#leerVehiculo" style="-fx-background-color: #B0CBFD;" text="INSERTAR" textAlignment="CENTER" textFill="#000103">
+            <Button mnemonicParsing="false" onAction="#leerVehiculo" style="-fx-background-color: #FFA38F;" text="INSERTAR" textAlignment="CENTER" textFill="#000103">
                <font>
                   <Font name="Impact" size="17.0" />
                </font>
@@ -80,13 +80,13 @@
             </Button>
             <ImageView fitHeight="49.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../../../../imagenes/buscar2.png" />
+                  <Image url="@../../../../../../../../imagenes/buscarV.png" />
                </image>
                <HBox.margin>
                   <Insets left="50.0" right="20.0" />
                </HBox.margin>
             </ImageView>
-            <Button mnemonicParsing="false" onAction="#buscarVehiculo" style="-fx-background-color: #B0CBFD;" text="BUSCAR " textAlignment="CENTER" textFill="#000103">
+            <Button mnemonicParsing="false" onAction="#buscarVehiculo" style="-fx-background-color: #FFA38F;" text="BUSCAR " textAlignment="CENTER" textFill="#000103">
                <font>
                   <Font name="Impact" size="17.0" />
                </font>
@@ -106,13 +106,13 @@
          <children>
             <ImageView fitHeight="49.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../../../../imagenes/borrar.png" />
+                  <Image url="@../../../../../../../../imagenes/borrarV.png" />
                </image>
                <HBox.margin>
                   <Insets left="50.0" right="20.0" />
                </HBox.margin>
             </ImageView>
-            <Button mnemonicParsing="false" onAction="#borrarVehiculo" style="-fx-background-color: #B0CBFD;" text="BORRAR" textAlignment="CENTER" textFill="#000103">
+            <Button mnemonicParsing="false" onAction="#borrarVehiculo" style="-fx-background-color: #FFA38F;" text="BORRAR" textAlignment="CENTER" textFill="#000103">
                <font>
                   <Font name="Impact" size="17.0" />
                </font>
@@ -125,7 +125,7 @@
                   <Insets left="60.0" right="20.0" />
                </HBox.margin>
             </ImageView>
-            <Button mnemonicParsing="false" onAction="#devolverVehiculo" style="-fx-background-color: #B0CBFD;" text="DEVOLVER" textAlignment="CENTER" textFill="#000103">
+            <Button mnemonicParsing="false" onAction="#devolverVehiculo" style="-fx-background-color: #FFA38F;" text="DEVOLVER" textAlignment="CENTER" textFill="#000103">
                <font>
                   <Font name="Impact" size="17.0" />
                </font>

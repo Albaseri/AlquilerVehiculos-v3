@@ -16,11 +16,11 @@
 
 <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="252.0" prefWidth="431.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.iesalandalus.programacion.alquilervehiculos.vista.grafica.controladores.BuscarCliente">
    <children>
-      <MenuBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="25.6" prefWidth="528.0" style="-fx-background-color: #B0E0FD;">
+      <MenuBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="25.6" prefWidth="528.0" style="-fx-background-color: #6BC0EB;">
          <menus>
             <Menu mnemonicParsing="false" text="Salir">
                <items>
-                  <MenuItem mnemonicParsing="false" onAction="#cerrarSesion" text="Cerrar sesión" />
+                  <MenuItem mnemonicParsing="false" onAction="#cerrarVentana" text="Cerrar ventana" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Ayuda">

@@ -17,7 +17,7 @@ public class DevolverCliente extends Controlador {
 	private TextField tfDni;
 
 	@FXML
-	private DatePicker tfFechaAlq;
+	private DatePicker dpFechaDev;
 
 	private boolean cancelado;
 
@@ -40,7 +40,7 @@ public class DevolverCliente extends Controlador {
 	}
 
 	@FXML
-	void cerrarSesion(ActionEvent event) {
+	void cerrarVentana(ActionEvent event) {
 		getEscenario().close();
 
 	}
@@ -52,14 +52,14 @@ public class DevolverCliente extends Controlador {
 	}
 
 	public LocalDate getFechaDevolucion() {
-		LocalDate fechaD = tfFechaAlq.getValue();
+		LocalDate fechaD = dpFechaDev.getValue();
 		return cancelado ? null : fechaD;
 
 	}
 
 	public void limpiar() {
 		tfDni.setText("");
-		tfFechaAlq.setValue(null);
+		dpFechaDev.setValue(null);
 		cancelado = true;
 	}
 

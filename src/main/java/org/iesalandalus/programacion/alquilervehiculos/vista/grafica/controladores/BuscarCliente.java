@@ -28,24 +28,6 @@ public class BuscarCliente extends Controlador {
 	}
 
 	@FXML
-	void acercaDe(ActionEvent event) {
-		AcercaDe acercaDe = (AcercaDe) Controladores.get("vistas/AcercaDe.fxml", "Información", getEscenario());
-		acercaDe.getEscenario().showAndWait();
-	}
-
-	@FXML
-	void cancelar(ActionEvent event) {
-		cancelado = true;
-		getEscenario().close();
-	}
-
-	@FXML
-	void cerrarSesion(ActionEvent event) {
-		getEscenario().close();
-
-	}
-
-	@FXML
 	void buscar(ActionEvent event) {
 		String dni = tfDni.getText();
 		Cliente cliente = VistaGrafica.getInstancia().getControlador().buscar(Cliente.getClienteConDni((dni)));
@@ -64,6 +46,24 @@ public class BuscarCliente extends Controlador {
 
 		return cancelado ? null
 				: VistaGrafica.getInstancia().getControlador().buscar(Cliente.getClienteConDni((tfDni.getText())));
+	}
+
+	@FXML
+	void acercaDe(ActionEvent event) {
+		AcercaDe acercaDe = (AcercaDe) Controladores.get("vistas/AcercaDe.fxml", "Información", getEscenario());
+		acercaDe.getEscenario().showAndWait();
+	}
+
+	@FXML
+	void cancelar(ActionEvent event) {
+		cancelado = true;
+		getEscenario().close();
+	}
+
+	@FXML
+	void cerrarVentana(ActionEvent event) {
+		getEscenario().close();
+
 	}
 
 	public void limpiar() {

@@ -15,13 +15,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="168.0" prefWidth="538.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.iesalandalus.programacion.alquilervehiculos.vista.grafica.controladores.DevolverVehiculo">
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="168.0" prefWidth="436.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.iesalandalus.programacion.alquilervehiculos.vista.grafica.controladores.DevolverVehiculo">
    <children>
-      <MenuBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="25.6" prefWidth="528.0" style="-fx-background-color: #B0E0FD;">
+      <MenuBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="25.6" prefWidth="528.0" style="-fx-background-color: #6BC0EB;">
          <menus>
             <Menu mnemonicParsing="false" text="Salir">
                <items>
-                  <MenuItem mnemonicParsing="false" onAction="#cerrarSesion" text="Cerrar sesión" />
+                  <MenuItem mnemonicParsing="false" onAction="#cerrarVentana" text="Cerrar ventana" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Ayuda">
@@ -36,8 +36,8 @@
       </MenuBar>
       <GridPane hgap="10.0" prefHeight="79.0" prefWidth="538.0" vgap="20.0">
          <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="270.20001220703125" minWidth="10.0" prefWidth="131.79998779296875" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="424.6000122070312" minWidth="10.0" prefWidth="424.6000122070312" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="270.20001220703125" minWidth="10.0" prefWidth="107.20000457763672" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="424.6000122070312" minWidth="10.0" prefWidth="297.59999542236335" />
          </columnConstraints>
          <rowConstraints>
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -50,7 +50,7 @@
                </font>
             </Label>
             <TextField fx:id="tfMatricula" maxWidth="100.0" GridPane.columnIndex="1" />
-            <DatePicker fx:id="tfFechaDev" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <DatePicker fx:id="dpFechaDev" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <Label prefHeight="16.0" prefWidth="108.0" text="Fecha Devolución:" GridPane.rowIndex="1">
                <font>
                   <Font name="Berlin Sans FB" size="14.0" />

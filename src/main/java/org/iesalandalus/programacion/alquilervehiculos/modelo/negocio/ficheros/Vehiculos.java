@@ -53,7 +53,7 @@ public class Vehiculos implements IVehiculos {
 	public void comenzar() {
 		Document documento = UtilidadesXml.leerXmlDeFichero(FICHERO_VEHICULOS);
 		if (documento != null) {
-			System.out.println("El fichero XML de vehiculos, ha sido leído correctamente.");
+			System.out.println("El fichero XML de vehículos ha sido leído correctamente.");
 			leerDom(documento);
 		} else {
 			System.out.printf("No se puede leer el fichero de entrada: %s.%n", FICHERO_VEHICULOS);
@@ -70,7 +70,7 @@ public class Vehiculos implements IVehiculos {
 					insertar(getVehiculo(((Element) vehiculo)));
 				} catch (Exception e) {
 					System.out.println(e.getMessage());
-					System.out.printf("ERROR: El error esta en el vehiculo que ocupa la posición: %s%n", i);
+					System.out.printf("ERROR: El error está en el vehículo que ocupa la posición: %s%n", i);
 				}
 			}
 		}

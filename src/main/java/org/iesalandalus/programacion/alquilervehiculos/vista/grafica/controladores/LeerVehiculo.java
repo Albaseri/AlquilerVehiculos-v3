@@ -61,8 +61,7 @@ public class LeerVehiculo extends Controlador {
 	}
 
 	private void mostrarTipo() {
-		RadioButton seleccionado = (RadioButton) grupo.getSelectedToggle(); // casting: en lugar de darme un
-																			// ToggleGroup, me da un Radiobutton
+		RadioButton seleccionado = (RadioButton) grupo.getSelectedToggle(); // casting: en lugar de darme un ToggleGroup, me da un Radiobutton
 		if (seleccionado == rbTurismo) {
 			tfCilindrada.setDisable(false);
 			tfPlazas.setDisable(true);
@@ -91,6 +90,8 @@ public class LeerVehiculo extends Controlador {
 		if (seleccionado == rbTurismo) {
 			String cilindrada = tfCilindrada.getText();
 			vehiculo = new Turismo(marca, modelo, Integer.parseInt(cilindrada), matricula);
+			
+			
 		} else if (seleccionado == rbAutobus) {
 			String plazas = tfPlazas.getText();
 			vehiculo = new Autobus(marca, modelo, Integer.parseInt(plazas), matricula);
@@ -100,8 +101,8 @@ public class LeerVehiculo extends Controlador {
 
 			vehiculo = new Furgoneta(marca, modelo, Integer.parseInt(pma), Integer.parseInt(plazas), matricula);
 		}
-		// return cancelado ? null : Vehiculo.copiar() (marca,modelo,matricula); //pasar vehículo
-		return vehiculo;
+		return cancelado ? null : vehiculo;
+
 	}
 
 	@FXML
@@ -123,7 +124,7 @@ public class LeerVehiculo extends Controlador {
 	}
 
 	@FXML
-	void cerrarSesion(ActionEvent event) {
+	void cerrarVentana(ActionEvent event) {
 		getEscenario().close();
 	}
 

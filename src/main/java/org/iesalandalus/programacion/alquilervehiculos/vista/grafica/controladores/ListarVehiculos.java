@@ -7,6 +7,7 @@ import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Furgoneta;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Turismo;
 import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Vehiculo;
 import org.iesalandalus.programacion.alquilervehiculos.vista.grafica.utilidades.Controlador;
+import org.iesalandalus.programacion.alquilervehiculos.vista.grafica.utilidades.Controladores;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -76,11 +77,21 @@ public class ListarVehiculos extends Controlador {
 			plazas = String.format("%s", furgoneta.getPlazas());
 		}
 		return plazas;
-
 	}
 
 	@FXML
 	private String formatearPma(Vehiculo vehiculo) {
 		return vehiculo instanceof Furgoneta furgoneta ? String.format("%s", furgoneta.getPma()) : "";
+	}
+	
+	@FXML
+	void acercaDe(ActionEvent event) {
+		AcercaDe acercaDe = (AcercaDe) Controladores.get("vistas/AcercaDe.fxml", "Información", getEscenario());
+		acercaDe.getEscenario().showAndWait();
+	}
+
+	@FXML
+	void cerrarVentana(ActionEvent event) {
+		getEscenario().close();
 	}
 }

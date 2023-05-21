@@ -12,13 +12,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="297.0" prefWidth="680.0" style="-fx-background-color: #EFF9FF;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.iesalandalus.programacion.alquilervehiculos.vista.grafica.controladores.Clientes">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="297.0" prefWidth="680.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.iesalandalus.programacion.alquilervehiculos.vista.grafica.controladores.Clientes">
    <children>
       <MenuBar nodeOrientation="RIGHT_TO_LEFT" style="-fx-background-color: #6BC0EB;">
          <menus>
             <Menu mnemonicParsing="false" text="Salir">
                <items>
-                  <MenuItem mnemonicParsing="false" onAction="#cerrarSesion" text="Cerrar sesión" />
+                  <MenuItem mnemonicParsing="false" onAction="#cerrarVentana" text="Cerrar ventana" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Ayuda">
@@ -54,7 +54,7 @@
                   <Insets bottom="10.0" left="30.0" />
                </HBox.margin>
             </ImageView>
-            <Button mnemonicParsing="false" onAction="#listarClientes" style="-fx-background-color: #B0CBFD;" text="LISTAR " textAlignment="CENTER" textFill="#130101">
+            <Button mnemonicParsing="false" onAction="#listarClientes" style="-fx-background-color: #B7B5F4;" text="LISTAR " textAlignment="CENTER" textFill="#130101">
                <HBox.margin>
                   <Insets bottom="20.0" left="20.0" right="20.0" top="10.0" />
                </HBox.margin>
@@ -70,7 +70,7 @@
                   <Insets left="50.0" right="20.0" />
                </HBox.margin>
             </ImageView>
-            <Button mnemonicParsing="false" onAction="#leerCliente" style="-fx-background-color: #B0CBFD;" text="INSERTAR" textAlignment="CENTER" textFill="#000103">
+            <Button mnemonicParsing="false" onAction="#leerCliente" style="-fx-background-color: #B7B5F4;" text="INSERTAR" textAlignment="CENTER" textFill="#000103">
                <font>
                   <Font name="Impact" size="17.0" />
                </font>
@@ -86,7 +86,7 @@
                   <Insets left="50.0" right="20.0" />
                </HBox.margin>
             </ImageView>
-            <Button mnemonicParsing="false" onAction="#buscarCliente" style="-fx-background-color: #B0CBFD;" text="BUSCAR " textAlignment="CENTER" textFill="#000103">
+            <Button mnemonicParsing="false" onAction="#buscarCliente" style="-fx-background-color: #B7B5F4;" text="BUSCAR " textAlignment="CENTER" textFill="#000103">
                <font>
                   <Font name="Impact" size="17.0" />
                </font>
@@ -112,7 +112,7 @@
                   <Insets left="-30.0" />
                </HBox.margin>
             </ImageView>
-            <Button mnemonicParsing="false" onAction="#modificarCliente" prefHeight="33.0" prefWidth="107.0" style="-fx-background-color: #B0CBFD;" text="MODIFICAR" textAlignment="CENTER" textFill="#000103">
+            <Button mnemonicParsing="false" onAction="#modificarCliente" prefHeight="33.0" prefWidth="107.0" style="-fx-background-color: #B7B5F4;" text="MODIFICAR" textAlignment="CENTER" textFill="#000103">
                <font>
                   <Font name="Impact" size="16.0" />
                </font>
@@ -128,7 +128,7 @@
                   <Insets left="50.0" right="20.0" />
                </HBox.margin>
             </ImageView>
-            <Button mnemonicParsing="false" onAction="#borrarCliente" style="-fx-background-color: #B0CBFD;" text="BORRAR" textAlignment="CENTER" textFill="#000103">
+            <Button mnemonicParsing="false" onAction="#borrarCliente" style="-fx-background-color: #B7B5F4;" text="BORRAR" textAlignment="CENTER" textFill="#000103">
                <font>
                   <Font name="Impact" size="17.0" />
                </font>
@@ -141,7 +141,7 @@
                   <Insets left="60.0" right="20.0" />
                </HBox.margin>
             </ImageView>
-            <Button mnemonicParsing="false" onAction="#devolverCliente" style="-fx-background-color: #B0CBFD;" text="DEVOLVER" textAlignment="CENTER" textFill="#000103">
+            <Button mnemonicParsing="false" onAction="#devolverCliente" style="-fx-background-color: #B7B5F4;" text="DEVOLVER" textAlignment="CENTER" textFill="#000103">
                <font>
                   <Font name="Impact" size="17.0" />
                </font>

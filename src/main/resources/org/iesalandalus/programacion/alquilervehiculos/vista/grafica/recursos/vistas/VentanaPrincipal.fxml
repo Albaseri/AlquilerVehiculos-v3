@@ -11,13 +11,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="TOP_CENTER" prefHeight="266.0" prefWidth="660.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.iesalandalus.programacion.alquilervehiculos.vista.grafica.controladores.VentanaPrincipal">
+<VBox alignment="TOP_CENTER" prefHeight="246.0" prefWidth="660.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.iesalandalus.programacion.alquilervehiculos.vista.grafica.controladores.VentanaPrincipal">
    <children>
       <MenuBar nodeOrientation="RIGHT_TO_LEFT" style="-fx-background-color: #6BC0EB;">
         <menus>
           <Menu mnemonicParsing="false" text="Salir">
             <items>
-              <MenuItem mnemonicParsing="false" onAction="#cerrarSesion" text="Cerrar sesión" />
+              <MenuItem mnemonicParsing="false" onAction="#cerrarVentana" text="Cerrar ventana" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Ayuda">
@@ -92,7 +92,7 @@
             <Insets left="5.0" top="10.0" />
          </padding>
          <VBox.margin>
-            <Insets bottom="90.0" left="90.0" right="90.0" top="20.0" />
+            <Insets bottom="60.0" left="90.0" right="90.0" top="20.0" />
          </VBox.margin>
       </HBox>
    </children>

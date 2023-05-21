@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Cliente;
 import org.iesalandalus.programacion.alquilervehiculos.vista.grafica.utilidades.Controlador;
+import org.iesalandalus.programacion.alquilervehiculos.vista.grafica.utilidades.Controladores;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -48,6 +49,17 @@ public class ListarClientes extends Controlador {
 
 	public void actualizar(List<Cliente> cliente) {
 		tvClientes.setItems(FXCollections.observableArrayList(cliente));
+	}
+	
+	@FXML
+	void acercaDe(ActionEvent event) {
+		AcercaDe acercaDe = (AcercaDe) Controladores.get("vistas/AcercaDe.fxml", "Información", getEscenario());
+		acercaDe.getEscenario().showAndWait();
+	}
+
+	@FXML
+	void cerrarVentana(ActionEvent event) {
+		getEscenario().close();
 	}
 
 }

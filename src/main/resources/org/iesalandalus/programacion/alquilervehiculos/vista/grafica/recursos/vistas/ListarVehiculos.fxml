@@ -3,6 +3,8 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -11,6 +13,20 @@
 
 <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="552.0" prefWidth="833.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.iesalandalus.programacion.alquilervehiculos.vista.grafica.controladores.ListarVehiculos">
    <children>
+      <MenuBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="25.6" prefWidth="528.0" style="-fx-background-color: #6BC0EB;">
+         <menus>
+            <Menu mnemonicParsing="false" text="Salir">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#cerrarVentana" text="Cerrar ventana" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Ayuda">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#acercaDe" text="Acerca de..." />
+               </items>
+            </Menu>
+         </menus>
+      </MenuBar>
       <TableView fx:id="tvVehiculos" prefHeight="526.0" prefWidth="834.0">
          <columns>
             <TableColumn fx:id="tcMarca" prefWidth="175.19995421171188" text="MARCA" />

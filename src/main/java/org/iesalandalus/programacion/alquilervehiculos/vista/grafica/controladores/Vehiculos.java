@@ -22,7 +22,7 @@ public class Vehiculos extends Controlador {
 	}
 
 	@FXML
-	void cerrarSesion(ActionEvent event) {
+	void cerrarVentana(ActionEvent event) {
 		getEscenario().close();
 
 	}
@@ -63,10 +63,10 @@ public class Vehiculos extends Controlador {
 
 		devolverVehiculo.getEscenario().showAndWait();
 		try {
-			Vehiculo cliente = devolverVehiculo.getDevolverVehiculo();
+			Vehiculo vehiculo = devolverVehiculo.getDevolverVehiculo();
 			LocalDate fechaD = devolverVehiculo.getFechaDevolucion();
-			if (cliente != null) {
-				VistaGrafica.getInstancia().getControlador().devolver(cliente, fechaD);
+			if (vehiculo != null) {
+				VistaGrafica.getInstancia().getControlador().devolver(vehiculo, fechaD);
 				Dialogos.mostrarDialogoAdvertencia("Devolver vehículo", "Alquiler de vehículo devuelto correctamente.",
 						getEscenario());
 			}
@@ -89,7 +89,7 @@ public class Vehiculos extends Controlador {
 						getEscenario());
 			}
 		} catch (OperationNotSupportedException | IllegalArgumentException | NullPointerException e) {
-			Dialogos.mostrarDialogoError("Insertar Vehículo", e.getMessage(), getEscenario());
+			Dialogos.mostrarDialogoError("Leer Vehículo", e.getMessage(), getEscenario());
 		}
 	}
 

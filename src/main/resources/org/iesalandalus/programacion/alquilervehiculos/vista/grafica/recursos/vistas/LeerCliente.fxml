@@ -14,13 +14,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="567.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.iesalandalus.programacion.alquilervehiculos.vista.grafica.controladores.LeerCliente">
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="433.0" style="-fx-background-color: #FFFF;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.iesalandalus.programacion.alquilervehiculos.vista.grafica.controladores.LeerCliente">
    <children>
-      <MenuBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="25.6" prefWidth="528.0" style="-fx-background-color: #B0E0FD;">
+      <MenuBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="25.6" prefWidth="528.0" style="-fx-background-color: #6BC0EB;">
          <menus>
             <Menu mnemonicParsing="false" text="Salir">
                <items>
-                  <MenuItem mnemonicParsing="false" onAction="#cerrarSesion" text="Cerrar sesión" />
+                  <MenuItem mnemonicParsing="false" onAction="#cerrarVentana" text="Cerrar ventana" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Ayuda">
@@ -35,8 +35,8 @@
       </MenuBar>
       <GridPane hgap="10.0" vgap="10.0">
         <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="270.20001220703125" minWidth="10.0" prefWidth="131.79998779296875" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="424.6000122070312" minWidth="10.0" prefWidth="424.6000122070312" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="270.20001220703125" minWidth="10.0" prefWidth="133.39998779296874" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="424.6000122070312" minWidth="10.0" prefWidth="289.40001220703124" />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -56,7 +56,7 @@
                <font>
                   <Font name="Berlin Sans FB" size="14.0" />
                </font></Label>
-            <TextField fx:id="tfNombre" maxHeight="100.0" maxWidth="300.0" GridPane.columnIndex="1" />
+            <TextField fx:id="tfNombre" maxHeight="100.0" maxWidth="200.0" GridPane.columnIndex="1" />
             <TextField fx:id="tfDni" maxWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <TextField fx:id="tfTelefono" maxWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
          </children>
@@ -66,8 +66,14 @@
       </GridPane>
       <HBox alignment="TOP_CENTER" spacing="20.0">
          <children>
-            <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#aceptar" text="Aceptar" textFill="#158f3c" />
-            <Button mnemonicParsing="false" onAction="#cancelar" text="Cancelar" textFill="#c42817" />
+            <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#aceptar" text="Aceptar" textFill="#158f3c">
+               <font>
+                  <Font name="Georgia" size="13.0" />
+               </font></Button>
+            <Button mnemonicParsing="false" onAction="#cancelar" text="Cancelar" textFill="#c42817">
+               <font>
+                  <Font name="Georgia" size="13.0" />
+               </font></Button>
          </children>
       </HBox>
    </children>

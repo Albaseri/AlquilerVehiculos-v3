@@ -1,6 +1,9 @@
 package org.iesalandalus.programacion.alquilervehiculos.modelo.negocio.ficheros;
 
 import java.io.File;
+
+// version 2
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -21,86 +24,98 @@ import org.w3c.dom.NodeList;
 
 public class Alquileres implements IAlquileres {
 
-	private static final File FICHERO_ALQUILERES = new File(
-			String.format("%s%s%s", "datos", File.separator, "alquileres.xml"));;
+	private static final File FICHEROS_ALQUILERES = new File(
+			String.format("%s%s%s", "datos", File.separator, "alquileres.xml"));
 	private static final DateTimeFormatter FORMATO_FECHA = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 	private static final String RAIZ = "alquileres";
 	private static final String ALQUILER = "alquiler";
-	private static final String CLIENTE = "cliente";
 	private static final String VEHICULO = "vehiculo";
+	private static final String CLIENTE = "cliente";
 	private static final String FECHA_ALQUILER = "fechaAlquiler";
 	private static final String FECHA_DEVOLUCION = "fechaDevolucion";
 
-	private List<Alquiler> coleccionAlquileres;
-
 	private static Alquileres instancia;
 
-	private Alquileres() {
-		coleccionAlquileres = new ArrayList<>();
+	private List<Alquiler> coleccionAlquileres;
+
+	public Alquileres() {
+
+		coleccionAlquileres = new ArrayList<>(); 
+
 	}
 
 	static Alquileres getInstancia() {
+
 		if (instancia == null) {
+
 			instancia = new Alquileres();
 		}
+
 		return instancia;
 	}
 
 	@Override
 	public void comenzar() {
-		Document documento = UtilidadesXml.leerXmlDeFichero(FICHERO_ALQUILERES);
-		if (documento != null) {
-			System.out.println("Fichero XML leído correctamente.");
+
+		Document documento = UtilidadesXml.leerXmlDeFichero(FICHEROS_ALQUILERES);
+
+		if (documento != null) { // Si el fichero es distinto de null 
+
+			System.out.println("El fichero XML de alquileres ha sido leído correctamente");
 			leerDom(documento);
 		} else {
-			System.out.printf("No se puede leer el fichero de entrada: %s.%n", FICHERO_ALQUILERES);
+			System.out.printf("No se puede leer el fichero: %s. %n", FICHEROS_ALQUILERES);
 		}
+
 	}
 
 	private void leerDom(Document documentoXml) {
+
 		NodeList alquileres = documentoXml.getElementsByTagName(ALQUILER);
 		for (int i = 0; i < alquileres.getLength(); i++) {
-			Node nAlquiler = alquileres.item(i);
-			if (nAlquiler.getNodeType() == Node.ELEMENT_NODE) {
+			Node alquiler = alquileres.item(i);
+			if (alquiler.getNodeType() == Node.ELEMENT_NODE) {
+
 				try {
-					insertar(getAlquiler((Element) nAlquiler));
-				} catch (Exception e) {
+					insertar(getAlquiler((Element) alquiler)); // le hacemos casting a cliente de tipo node para que sea
+																// un elemento
+				} catch (OperationNotSupportedException | NullPointerException e) {
 					System.out.println(e.getMessage());
+					System.out.println(i);
 				}
 			}
 		}
 	}
 
 	private Alquiler getAlquiler(Element elemento) throws OperationNotSupportedException {
-		String cliente = elemento.getAttribute(CLIENTE);
-		Cliente buscarCliente = Clientes.getInstancia().buscar(Cliente.getClienteConDni(cliente));
-		String fechaAlquiler = elemento.getAttribute(FECHA_ALQUILER);
-		LocalDate localDate = LocalDate.parse(fechaAlquiler, FORMATO_FECHA);
-		String vehiculo = elemento.getAttribute(VEHICULO);
-		Vehiculo buscarVehiculo = Vehiculos.getInstancia().buscar(Vehiculo.getVehiculoConMatricula(vehiculo));
-
-		if (buscarCliente == null) {
-			throw new NullPointerException("No se puede buscar un cliente nulo. ");
+		Cliente clienteEncontrado = Clientes.getInstancia()
+				.buscar(Cliente.getClienteConDni(elemento.getAttribute(CLIENTE)));
+		if (clienteEncontrado == null) {
+			throw new NullPointerException("ERROR: no existe un cliente con ese DNI.");
 		}
-		if (buscarVehiculo == null) {
-			throw new NullPointerException("No se puede buscar un vehículo nulo. ");
-		}
-		Alquiler alquiler = new Alquiler(buscarCliente, buscarVehiculo, localDate);
+		Vehiculo vehiculoEncontrado = Vehiculos.getInstancia()
+				.buscar(Vehiculo.getVehiculoConMatricula(elemento.getAttribute(VEHICULO)));
 
+		if (vehiculoEncontrado == null) {
+			throw new NullPointerException("ERROR: no existe un vehículo con esa matrícula.");
+		}
+		LocalDate fechaAlquiler = LocalDate.parse(elemento.getAttribute(FECHA_ALQUILER), FORMATO_FECHA);
+		Alquiler alquiler = new Alquiler(clienteEncontrado, vehiculoEncontrado, fechaAlquiler);
 		if (elemento.hasAttribute(FECHA_DEVOLUCION)) {
-			// String fechaDevolucion = elemento.getAttribute(FECHA_DEVOLUCION);
-			LocalDate localD = LocalDate.parse(elemento.getAttribute(FECHA_DEVOLUCION), FORMATO_FECHA);
-			alquiler.devolver(localD);
+			alquiler.devolver(LocalDate.parse(elemento.getAttribute(FECHA_DEVOLUCION), FORMATO_FECHA));
 		}
 		return alquiler;
 	}
 
 	@Override
 	public void terminar() {
-		UtilidadesXml.escribirXmlAFichero(crearDom(), FICHERO_ALQUILERES);
+
+		UtilidadesXml.escribirXmlAFichero(crearDom(), FICHEROS_ALQUILERES);
+
 	}
 
 	private Document crearDom() {
+
 		DocumentBuilder constructor = UtilidadesXml.crearConstructorDocumentoXml();
 		Document documentoXml = null;
 		if (constructor != null) {
@@ -116,16 +131,19 @@ public class Alquileres implements IAlquileres {
 	}
 
 	private Element getElemento(Document documentoXml, Alquiler alquiler) {
+
 		Element elementoAlquiler = documentoXml.createElement(ALQUILER);
 		elementoAlquiler.setAttribute(CLIENTE, alquiler.getCliente().getDni());
 		elementoAlquiler.setAttribute(FECHA_ALQUILER,
 				String.format("%s", alquiler.getFechaAlquiler().format(FORMATO_FECHA)));
-		LocalDate fechaDevolucion = alquiler.getFechaDevolucion();
-		if (fechaDevolucion != null) {
-			elementoAlquiler.setAttribute(FECHA_DEVOLUCION, String.format("%s", fechaDevolucion.format(FORMATO_FECHA)));
-		}
 		elementoAlquiler.setAttribute(VEHICULO, alquiler.getVehiculo().getMatricula());
+
+		if (alquiler.getFechaDevolucion() != null) {
+
+			elementoAlquiler.setAttribute(FECHA_DEVOLUCION, alquiler.getFechaDevolucion().format(FORMATO_FECHA));
+		}
 		return elementoAlquiler;
+
 	}
 
 	@Override
@@ -135,38 +153,51 @@ public class Alquileres implements IAlquileres {
 
 	@Override
 	public List<Alquiler> get(Cliente cliente) {
-		List<Alquiler> listaAlquileres = new ArrayList<>();
+
+		List<Alquiler> listaNuevaCliente = new ArrayList<>();
+
 		for (Alquiler alquiler : coleccionAlquileres) {
 			if (alquiler.getCliente().equals(cliente)) {
-				listaAlquileres.add(alquiler);
+				listaNuevaCliente.add(alquiler);
 			}
 		}
-		return listaAlquileres;
+		return listaNuevaCliente;
+
 	}
 
 	@Override
 	public List<Alquiler> get(Vehiculo vehiculo) {
-		List<Alquiler> listaAlquileres = new ArrayList<>();
+
+		List<Alquiler> listaNuevaTurismo = new ArrayList<>();
+
 		for (Alquiler alquiler : coleccionAlquileres) {
 			if (alquiler.getVehiculo().equals(vehiculo)) {
-				listaAlquileres.add(alquiler);
+
+				listaNuevaTurismo.add(alquiler);
+
 			}
+
 		}
-		return listaAlquileres;
+		return listaNuevaTurismo;
+
 	}
 
 	private void comprobarAlquiler(Cliente cliente, Vehiculo vehiculo, LocalDate fechaAlquiler)
 			throws OperationNotSupportedException {
 		for (Alquiler alquiler : coleccionAlquileres) {
+
 			if (alquiler.getFechaDevolucion() == null) {
 
 				if (alquiler.getCliente().equals(cliente)) {
 					throw new OperationNotSupportedException("ERROR: El cliente tiene otro alquiler sin devolver.");
 				}
 				if (alquiler.getVehiculo().equals(vehiculo)) {
-					throw new OperationNotSupportedException("ERROR: El vehículo está actualmente alquilado.");
+
+					throw new OperationNotSupportedException("ERROR: El vehículo está alquilado actualmente.");
 				}
+
 			} else {
+
 				if (alquiler.getCliente().equals(cliente) && (alquiler.getFechaDevolucion().isAfter(fechaAlquiler)
 						|| alquiler.getFechaDevolucion().isEqual(fechaAlquiler))) {
 					throw new OperationNotSupportedException("ERROR: El cliente tiene un alquiler posterior.");
@@ -181,82 +212,116 @@ public class Alquileres implements IAlquileres {
 
 	@Override
 	public void insertar(Alquiler alquiler) throws OperationNotSupportedException {
+
 		if (alquiler == null) {
 			throw new NullPointerException("ERROR: No se puede insertar un alquiler nulo.");
 		}
-		comprobarAlquiler(alquiler.getCliente(), alquiler.getVehiculo(), alquiler.getFechaAlquiler());
-		coleccionAlquileres.add(alquiler);
+
+		if (!coleccionAlquileres.contains(alquiler)) {
+			comprobarAlquiler(alquiler.getCliente(), alquiler.getVehiculo(), alquiler.getFechaAlquiler());
+			coleccionAlquileres.add(alquiler);
+		}
+
 	}
 
+	public Alquiler getAlquilerAbiertoCliente(Cliente cliente) {
+
+		Alquiler devuelvoAlquilerAbiertoCliente = null;
+
+		for (Iterator<Alquiler> iterator = coleccionAlquileres.iterator(); iterator.hasNext()
+				&& devuelvoAlquilerAbiertoCliente == null;) {
+			Alquiler alquiler = iterator.next();
+			if (alquiler.getCliente().equals(cliente) && alquiler.getFechaDevolucion() == null) {
+				devuelvoAlquilerAbiertoCliente = alquiler;
+			}
+
+		}
+
+		return devuelvoAlquilerAbiertoCliente;
+
+	}
+
+	public Alquiler getAlquilerAbiertoVehiculo(Vehiculo vehiculo) {
+
+		Alquiler devuelvoAlquilerAbiertoVehiculo = null;
+
+		for (Iterator<Alquiler> iterator = coleccionAlquileres.iterator(); devuelvoAlquilerAbiertoVehiculo == null
+				&& iterator.hasNext();) {
+			Alquiler alquiler = (Alquiler) iterator.next();
+
+			if (alquiler.getVehiculo().equals(vehiculo) && alquiler.getFechaDevolucion() == null) {
+				devuelvoAlquilerAbiertoVehiculo = alquiler;
+			}
+		}
+		return devuelvoAlquilerAbiertoVehiculo;
+
+	}
+
+	@Override
+
 	public void devolver(Cliente cliente, LocalDate fechaDevolucion) throws OperationNotSupportedException {
+
 		if (cliente == null) {
 			throw new NullPointerException("ERROR: No se puede devolver un alquiler de un cliente nulo.");
 		}
-		Alquiler alquiler = getAlquilerAbierto(cliente);
-		if (alquiler == null) {
-			throw new OperationNotSupportedException("ERROR: No existe ningún alquiler abierto para ese cliente.");
+
+		Alquiler alquiler = getAlquilerAbiertoCliente(cliente);
+
+		if (alquiler != null) {
+
+			alquiler.devolver(fechaDevolucion);
 		} else {
-			alquiler.devolver(fechaDevolucion); // corregido
+			throw new OperationNotSupportedException("ERROR: No existe ningún alquiler abierto para ese cliente.");
 		}
+
 	}
 
-	private Alquiler getAlquilerAbierto(Cliente cliente) {
-		Alquiler alquilerAbierto = null;
-		for (Iterator<Alquiler> iterator = coleccionAlquileres.iterator(); alquilerAbierto == null
-				&& iterator.hasNext();) {
-			Alquiler alquiler = iterator.next();
-			if (alquiler.getCliente().equals(cliente) && alquiler.getFechaDevolucion() == null) {
-				alquilerAbierto = alquiler;
-			}
-		}
-		return alquilerAbierto;
-	}
-
+	@Override
 	public void devolver(Vehiculo vehiculo, LocalDate fechaDevolucion) throws OperationNotSupportedException {
+
 		if (vehiculo == null) {
 			throw new NullPointerException("ERROR: No se puede devolver un alquiler de un vehículo nulo.");
 		}
-		Alquiler alquiler = getAlquilerAbierto(vehiculo);
-		if (alquiler == null) {
+
+		Alquiler alquiler = getAlquilerAbiertoVehiculo(vehiculo);
+
+		if (alquiler != null) {
+			alquiler.devolver(fechaDevolucion);
+		} else {
 			throw new OperationNotSupportedException("ERROR: No existe ningún alquiler abierto para ese vehículo.");
 		}
-		alquiler.devolver(fechaDevolucion);
-	}
 
-	private Alquiler getAlquilerAbierto(Vehiculo vehiculo) {
-		Alquiler alquilerAbiertoVehiculo = null;
-		for (Iterator<Alquiler> iterator = coleccionAlquileres.iterator(); alquilerAbiertoVehiculo == null
-				&& iterator.hasNext();) {
-			Alquiler alquiler = iterator.next();
-			if (alquiler.getVehiculo().equals(vehiculo) && alquiler.getFechaDevolucion() == null) {
-				alquilerAbiertoVehiculo = alquiler;
-			}
-		}
-		return alquilerAbiertoVehiculo;
 	}
 
 	@Override
 	public Alquiler buscar(Alquiler alquiler) {
+
 		if (alquiler == null) {
 			throw new NullPointerException("ERROR: No se puede buscar un alquiler nulo.");
 		}
-		if (coleccionAlquileres.indexOf(alquiler) == -1) { // si es diferente de -1 significa que lo contiene
-			alquiler = null; // si no lo contiene, lo inicializa a null
+		int alquilerIndice = coleccionAlquileres.indexOf(alquiler);
+		if (alquilerIndice == -1) { // El -1 en un numerico es como si fuera null, por lo tanto si es diferente de null
+			alquiler = null; // Cogemos el indice del alquiler
 		} else {
-			coleccionAlquileres.get(coleccionAlquileres.indexOf(alquiler));
+			alquiler = coleccionAlquileres.get(alquilerIndice);
+
 		}
-		return alquiler;
+		return alquiler; // devolvemos el valor que hay dentro del indice de la lista.
 	}
 
 	@Override
 	public void borrar(Alquiler alquiler) throws OperationNotSupportedException {
+
 		if (alquiler == null) {
 			throw new NullPointerException("ERROR: No se puede borrar un alquiler nulo.");
 		}
-		if (coleccionAlquileres.contains(alquiler)) {
+
+		if (coleccionAlquileres.contains(alquiler)) { // si existe en la lista
+			coleccionAlquileres.remove(alquiler);
+		} else {
 			throw new OperationNotSupportedException("ERROR: No existe ningún alquiler igual.");
 		}
-		coleccionAlquileres.remove(alquiler);
 
 	}
+
 }

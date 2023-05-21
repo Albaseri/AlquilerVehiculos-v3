@@ -15,7 +15,7 @@ public class VentanaPrincipal extends Controlador {
 	}
 
 	@FXML
-	void cerrarSesion(ActionEvent event) {
+	void cerrarVentana(ActionEvent event) {
 		getEscenario().close();
 
 	}

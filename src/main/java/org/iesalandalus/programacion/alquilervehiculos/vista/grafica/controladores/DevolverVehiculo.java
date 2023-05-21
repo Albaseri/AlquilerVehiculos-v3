@@ -15,10 +15,11 @@ import javafx.scene.control.TextField;
 public class DevolverVehiculo extends Controlador {
 
 	@FXML
-	private DatePicker tfFechaDev;
+	private DatePicker dpFechaDev;
 
 	@FXML
 	private TextField tfMatricula;
+
 	private boolean cancelado;
 
 	@FXML
@@ -40,7 +41,7 @@ public class DevolverVehiculo extends Controlador {
 	}
 
 	@FXML
-	void cerrarSesion(ActionEvent event) {
+	void cerrarVentana(ActionEvent event) {
 		getEscenario().close();
 
 	}
@@ -53,14 +54,14 @@ public class DevolverVehiculo extends Controlador {
 	}
 
 	public LocalDate getFechaDevolucion() {
-		LocalDate fechaD = tfFechaDev.getValue();
+		LocalDate fechaD = dpFechaDev.getValue();
 		return cancelado ? null : fechaD;
 
 	}
 
 	public void limpiar() {
 		tfMatricula.setText("");
-		tfFechaDev.setValue(null);
+		dpFechaDev.setValue(null);
 		cancelado = true;
 	}
 

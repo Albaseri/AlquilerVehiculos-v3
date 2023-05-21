@@ -2,10 +2,11 @@
 <clientes>
     <cliente dni="11223344B" nombre="Bob Esponja" telefono="950112233"/>
     <cliente dni="11111111H" nombre="Topo" telefono="625676898"/>
-    <cliente dni="56789765M" nombre="Juanma" telefono="678987845"/>
+    <cliente dni="56789765M" nombre="Maria" telefono="678987845"/>
     <cliente dni="74802651G" nombre="Paco" telefono="625345672"/>
-    <cliente dni="55496074H" nombre="Maria" telefono="637021937"/>
+    <cliente dni="55496074H" nombre="Federico" telefono="637021937"/>
     <cliente dni="43956188Z" nombre="Pepino" telefono="645789012"/>
-    <cliente dni="77170845A" nombre="Isa" telefono="625979765"/>
-    <cliente dni="26515544V" nombre="Juan Manuel" telefono="654678765"/>
+    <cliente dni="26515544V" nombre="Juan" telefono="654678765"/>
+    <cliente dni="77170845A" nombre="Alba" telefono="653412531"/>
+    <cliente dni="75727626B" nombre="Fran" telefono="680617071"/>
 </clientes>

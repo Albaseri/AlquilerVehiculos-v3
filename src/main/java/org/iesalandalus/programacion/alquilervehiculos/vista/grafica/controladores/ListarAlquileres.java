@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.iesalandalus.programacion.alquilervehiculos.modelo.dominio.Alquiler;
 import org.iesalandalus.programacion.alquilervehiculos.vista.grafica.utilidades.Controlador;
+import org.iesalandalus.programacion.alquilervehiculos.vista.grafica.utilidades.Controladores;
+import org.iesalandalus.programacion.alquilervehiculos.vista.grafica.utilidades.Controles.FormateadorCeldaFecha;
 
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -27,26 +29,32 @@ public class ListarAlquileres extends Controlador {
 
 	@FXML
 	private TableColumn<Alquiler, String> tcMatricula;
+	@FXML
+	private TableColumn<Alquiler, String> tcPrecio;
 
 	@FXML
 	private TableView<Alquiler> tvAlquileres;
 
 	@FXML
 	void initialize() {
-		tcDni.setCellValueFactory(fila -> new SimpleStringProperty(fila.getValue().getCliente().getDni()));
 		tcFechaA.setCellValueFactory(fila -> new SimpleObjectProperty<>(fila.getValue().getFechaAlquiler()));
-		tcMatricula.setCellValueFactory(fila -> new SimpleStringProperty(fila.getValue().getVehiculo().getMatricula()));
+		tcFechaA.setCellFactory(columna -> new FormateadorCeldaFecha());		
 		tcFechaD.setCellValueFactory(fila -> new SimpleObjectProperty<>(fila.getValue().getFechaDevolucion()));
+		tcFechaD.setCellFactory(columna -> new FormateadorCeldaFecha());		
 
+		tcDni.setCellValueFactory(fila -> new SimpleStringProperty(fila.getValue().getCliente().getDni()));
+		tcMatricula.setCellValueFactory(fila -> new SimpleStringProperty(fila.getValue().getVehiculo().getMatricula()));
+		tcPrecio.setCellValueFactory(fila -> new SimpleStringProperty(formatearPrecio(fila.getValue())));
+		
 	}
 
 	@FXML
-	void listarAlquileresCliente(ActionEvent event) {
-
-	}
-
-	@FXML
-	void listarAlquileresVehiculo(ActionEvent event) {
+	private String formatearPrecio(Alquiler alquiler) {
+		String cadena = "";
+		if (alquiler.getFechaDevolucion() != null) {
+			cadena = String.format("%s", alquiler.getPrecio());
+		}
+		return cadena;
 
 	}
 
@@ -59,6 +67,17 @@ public class ListarAlquileres extends Controlador {
 	public void actualizar(List<Alquiler> alquileres) {
 		tvAlquileres.setItems(FXCollections.observableArrayList(alquileres));
 
+	}
+
+	@FXML
+	void acercaDe(ActionEvent event) {
+		AcercaDe acercaDe = (AcercaDe) Controladores.get("vistas/AcercaDe.fxml", "Información", getEscenario());
+		acercaDe.getEscenario().showAndWait();
+	}
+
+	@FXML
+	void cerrarVentana(ActionEvent event) {
+		getEscenario().close();
 	}
 
 }
